@@ -9,16 +9,14 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import CardActions from '@mui/material/CardActions';
 import axios from 'axios';
+import { useUserStore } from '../../../stores';
 
 
 export default function SignIn() {
     const [email,setEmail] =useState('')
     const [password,setPassword] =useState('')
+    const [nickname,setNickname] =useState('')
     const [cookie,setCookies] = useCookies();
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-    
-
 
     
     const signInhandler =() =>{
@@ -30,7 +28,8 @@ export default function SignIn() {
     
     const data = {
         email,
-        password
+        password,
+        nickname
     }
     axios
     .post("http://localhost:8080/login", data)
@@ -39,6 +38,7 @@ export default function SignIn() {
       const refreshToken = response.headers['refresh_Token'];
       setCookies('AccessToken',accessToken)
       setCookies('RefreshToken', refreshToken); 
+
     })
     .catch((error) => {
       console.error('로그인 에러 : ' + error);

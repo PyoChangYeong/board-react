@@ -35,7 +35,7 @@ export default function SignIn(props:Props) {
       nickname
     }
     axios
-      .post("http://localhost:8080/login", data)
+      .post("3.37.240.93:8080/login", data)
       .then((response) => {
         const accessToken = response.headers['authorization'];
         const refreshToken = response.headers['refresh_Token'];
